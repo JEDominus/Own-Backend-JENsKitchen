@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MealDto {
+    private String id;
     private String mealName;
     private TypesEnum mealType;
     private List<IngredientDto> ingredients;
