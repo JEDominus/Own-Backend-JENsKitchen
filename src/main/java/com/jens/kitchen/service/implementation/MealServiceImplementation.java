@@ -2,6 +2,7 @@ package com.jens.kitchen.service.implementation;
 
 import com.jens.kitchen.domain.NewMealRequest;
 import com.jens.kitchen.domain.NewMealResponse;
+import com.jens.kitchen.exceptions.NotFoundException;
 import com.jens.kitchen.model.dtos.MealDto;
 import com.jens.kitchen.repository.MealRepository;
 import com.jens.kitchen.service.MealService;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 public class MealServiceImplementation implements MealService {
@@ -39,5 +42,17 @@ public class MealServiceImplementation implements MealService {
     @Override
     public List<MealDto> getAllMeals(){
         return repository.findAll();
+    }
+
+    @Override
+    public MealDto getMealById(String id){
+        Optional<MealDto> mealFound = repository.findById(id);
+
+        if(mealFound.isPresent()){
+            MealDto meal = mealFound.get();
+            return meal;
+        }else{
+            throw new NotFoundException(String.format("Meal not found with id: ", id));
+        }
     }
 }
