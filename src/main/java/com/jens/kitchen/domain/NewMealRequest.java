@@ -1,12 +1,10 @@
-package com.jens.kitchen.model.dtos;
+package com.jens.kitchen.domain;
 
+import com.jens.kitchen.model.dtos.IngredientDto;
+import com.jens.kitchen.model.dtos.RecipeDto;
 import com.jens.kitchen.model.enums.TypesEnum;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
@@ -15,9 +13,7 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class MealDto {
-    @Id
-    private String id;
+public class NewMealRequest {
     private String mealName;
     private TypesEnum mealType;
     private List<IngredientDto> ingredients;
