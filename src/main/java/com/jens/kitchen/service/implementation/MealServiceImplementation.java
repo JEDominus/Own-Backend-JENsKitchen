@@ -9,6 +9,8 @@ import com.jens.kitchen.validator.MealValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MealServiceImplementation implements MealService {
 
@@ -34,4 +36,8 @@ public class MealServiceImplementation implements MealService {
         return new NewMealResponse(savedMeal.getId());
     }
 
+    @Override
+    public List<MealDto> getAllMeals(){
+        return repository.findAll();
+    }
 }
