@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface MealRepository extends MongoRepository<MealDto, String> {
 
+    @Override
     List<MealDto> findAll();
 
 }

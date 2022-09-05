@@ -18,7 +18,7 @@ public class MealController {
     private MealService service;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/createMeal", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
     public NewMealResponse createNewMeal(@RequestBody NewMealRequest request){
         return service.createMeal(request);
     }
@@ -27,5 +27,11 @@ public class MealController {
     @GetMapping("/")
     public List<MealDto> getAllMeals(){
         return service.getAllMeals();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public MealDto getMealById(@PathVariable String id){
+        return service.getMealById(id);
     }
 }
