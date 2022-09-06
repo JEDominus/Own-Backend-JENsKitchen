@@ -74,4 +74,15 @@ public class MealServiceImplementation implements MealService {
             throw new NotFoundException(String.format("Meal not found with id: ", id));
         }
     }
+
+    @Override
+    public void deleteMeal(String id) {
+        Optional<MealDto> mealFound = repository.findById(id);
+
+        if(mealFound.isPresent()){
+            repository.deleteById(id);
+        }else{
+            throw new NotFoundException(String.format("Meal not found with id: ", id));
+        }
+    }
 }
