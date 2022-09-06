@@ -10,7 +10,9 @@ public interface MealService {
 
     NewMealResponse createMeal(NewMealRequest request);
 
-    List<MealDto> getAllMeals();
+    List<com.jens.kitchen.model.dtos.MealDto> getAllMeals();
 
-    MealDto getMealById(String id);
+    com.jens.kitchen.model.dtos.MealDto getMealById(String id);
+
+    MealDto updateMeal(MealDto request, String id);
 }

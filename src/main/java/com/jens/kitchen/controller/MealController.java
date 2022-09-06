@@ -25,13 +25,19 @@ public class MealController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/")
-    public List<MealDto> getAllMeals(){
+    public List<com.jens.kitchen.model.dtos.MealDto> getAllMeals(){
         return service.getAllMeals();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public MealDto getMealById(@PathVariable String id){
+    public com.jens.kitchen.model.dtos.MealDto getMealById(@PathVariable String id){
         return service.getMealById(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
+    public MealDto updateMeal(@RequestBody MealDto request, @PathVariable String id){
+        return service.updateMeal(request, id);
     }
 }

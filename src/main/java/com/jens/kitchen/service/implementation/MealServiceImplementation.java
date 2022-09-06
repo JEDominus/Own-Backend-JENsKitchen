@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class MealServiceImplementation implements MealService {
@@ -27,30 +26,50 @@ public class MealServiceImplementation implements MealService {
     public NewMealResponse createMeal(NewMealRequest request) {
         validator.validate(request);
 
-        MealDto meal = MealDto.builder().
+        com.jens.kitchen.model.dtos.MealDto meal = com.jens.kitchen.model.dtos.MealDto.builder().
                 mealName(request.getMealName()).
                 mealType(request.getMealType()).
                 ingredients(request.getIngredients()).
                 recipe(request.getRecipe()).
                 build();
 
-        MealDto savedMeal = repository.save(meal);
+        com.jens.kitchen.model.dtos.MealDto savedMeal = repository.save(meal);
 
         return new NewMealResponse(savedMeal.getId());
     }
 
     @Override
-    public List<MealDto> getAllMeals(){
+    public List<com.jens.kitchen.model.dtos.MealDto> getAllMeals(){
         return repository.findAll();
     }
 
     @Override
-    public MealDto getMealById(String id){
+    public com.jens.kitchen.model.dtos.MealDto getMealById(String id){
+        Optional<com.jens.kitchen.model.dtos.MealDto> mealFound = repository.findById(id);
+
+        if(mealFound.isPresent()){
+            com.jens.kitchen.model.dtos.MealDto meal = mealFound.get();
+            return meal;
+        }else{
+            throw new NotFoundException(String.format("Meal not found with id: ", id));
+        }
+    }
+
+    @Override
+    public MealDto updateMeal(MealDto request, String id){
+        validator.validate(request);
+
         Optional<MealDto> mealFound = repository.findById(id);
 
         if(mealFound.isPresent()){
-            MealDto meal = mealFound.get();
-            return meal;
+            MealDto updatedMeal = mealFound.get();
+            updatedMeal.setMealName(request.getMealName()).
+                    setMealType(request.getMealType()).
+                    setIngredients(request.getIngredients()).
+                    setRecipe(request.getRecipe());
+
+            repository.save(updatedMeal);
+            return updatedMeal;
         }else{
             throw new NotFoundException(String.format("Meal not found with id: ", id));
         }

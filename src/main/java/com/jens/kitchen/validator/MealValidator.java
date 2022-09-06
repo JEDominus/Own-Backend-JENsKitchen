@@ -2,6 +2,7 @@ package com.jens.kitchen.validator;
 
 import com.jens.kitchen.domain.NewMealRequest;
 import com.jens.kitchen.exceptions.BadRequestException;
+import com.jens.kitchen.model.dtos.MealDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,13 @@ public class MealValidator {
     private RecipeValidator recipeValidator;
 
     public void validate(NewMealRequest request){
+        validateMealName(request.getMealName());
+
+        ingredientValidator.validate(request.getIngredients());
+        recipeValidator.validate(request.getRecipe());
+    }
+
+    public void validate(MealDto request){
         validateMealName(request.getMealName());
 
         ingredientValidator.validate(request.getIngredients());
