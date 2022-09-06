@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class MealServiceImplementation implements MealService {
@@ -51,6 +50,26 @@ public class MealServiceImplementation implements MealService {
         if(mealFound.isPresent()){
             MealDto meal = mealFound.get();
             return meal;
+        }else{
+            throw new NotFoundException(String.format("Meal not found with id: ", id));
+        }
+    }
+
+    @Override
+    public MealDto updateMeal(MealDto request, String id){
+        validator.validate(request);
+
+        Optional<MealDto> mealFound = repository.findById(id);
+
+        if(mealFound.isPresent()){
+            MealDto updatedMeal = mealFound.get();
+            updatedMeal.setMealName(request.getMealName()).
+                    setMealType(request.getMealType()).
+                    setIngredients(request.getIngredients()).
+                    setRecipe(request.getRecipe());
+
+            repository.save(updatedMeal);
+            return updatedMeal;
         }else{
             throw new NotFoundException(String.format("Meal not found with id: ", id));
         }

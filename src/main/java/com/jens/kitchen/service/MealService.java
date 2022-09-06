@@ -13,4 +13,6 @@ public interface MealService {
     List<MealDto> getAllMeals();
 
     MealDto getMealById(String id);
+
+    MealDto updateMeal(MealDto request, String id);
 }

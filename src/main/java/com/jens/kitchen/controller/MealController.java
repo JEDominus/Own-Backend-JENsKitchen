@@ -34,4 +34,10 @@ public class MealController {
     public MealDto getMealById(@PathVariable String id){
         return service.getMealById(id);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
+    public MealDto updateMeal(@RequestBody MealDto request, @PathVariable String id){
+        return service.updateMeal(request, id);
+    }
 }
