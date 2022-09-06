@@ -25,13 +25,13 @@ public class MealController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/")
-    public List<com.jens.kitchen.model.dtos.MealDto> getAllMeals(){
+    public List<MealDto> getAllMeals(){
         return service.getAllMeals();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
-    public com.jens.kitchen.model.dtos.MealDto getMealById(@PathVariable String id){
+    public MealDto getMealById(@PathVariable String id){
         return service.getMealById(id);
     }
 

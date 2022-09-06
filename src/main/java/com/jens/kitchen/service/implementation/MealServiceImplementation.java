@@ -26,29 +26,29 @@ public class MealServiceImplementation implements MealService {
     public NewMealResponse createMeal(NewMealRequest request) {
         validator.validate(request);
 
-        com.jens.kitchen.model.dtos.MealDto meal = com.jens.kitchen.model.dtos.MealDto.builder().
+        MealDto meal = MealDto.builder().
                 mealName(request.getMealName()).
                 mealType(request.getMealType()).
                 ingredients(request.getIngredients()).
                 recipe(request.getRecipe()).
                 build();
 
-        com.jens.kitchen.model.dtos.MealDto savedMeal = repository.save(meal);
+        MealDto savedMeal = repository.save(meal);
 
         return new NewMealResponse(savedMeal.getId());
     }
 
     @Override
-    public List<com.jens.kitchen.model.dtos.MealDto> getAllMeals(){
+    public List<MealDto> getAllMeals(){
         return repository.findAll();
     }
 
     @Override
-    public com.jens.kitchen.model.dtos.MealDto getMealById(String id){
-        Optional<com.jens.kitchen.model.dtos.MealDto> mealFound = repository.findById(id);
+    public MealDto getMealById(String id){
+        Optional<MealDto> mealFound = repository.findById(id);
 
         if(mealFound.isPresent()){
-            com.jens.kitchen.model.dtos.MealDto meal = mealFound.get();
+            MealDto meal = mealFound.get();
             return meal;
         }else{
             throw new NotFoundException(String.format("Meal not found with id: ", id));
