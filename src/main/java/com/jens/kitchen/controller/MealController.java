@@ -40,4 +40,10 @@ public class MealController {
     public MealDto updateMeal(@RequestBody MealDto request, @PathVariable String id){
         return service.updateMeal(request, id);
     }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public void deleteMeal(@PathVariable String id){
+        service.deleteMeal(id);
+    }
 }
