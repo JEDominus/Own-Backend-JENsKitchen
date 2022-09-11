@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -45,5 +46,12 @@ public class MealController {
     @DeleteMapping("/{id}")
     public void deleteMeal(@PathVariable String id){
         service.deleteMeal(id);
+    }
+
+    //Temoporal Feature - Gonna be managed in frontend
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/list/{number}")
+    public List<String> getListOfWeekMeals(@PathVariable int number){
+        return service.mealsSelector(number);
     }
 }

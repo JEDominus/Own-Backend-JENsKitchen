@@ -10,8 +10,7 @@ import com.jens.kitchen.validator.MealValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class MealServiceImplementation implements MealService {
@@ -24,7 +23,7 @@ public class MealServiceImplementation implements MealService {
 
     @Override
     public NewMealResponse createMeal(NewMealRequest request) {
-        validator.validate(request);
+        //validator.validate(request);
 
         MealDto meal = MealDto.builder().
                 mealName(request.getMealName()).
@@ -84,5 +83,17 @@ public class MealServiceImplementation implements MealService {
         }else{
             throw new NotFoundException(String.format("Meal not found with id: ", id));
         }
+    }
+
+    @Override
+    public List<String> mealsSelector(int number) {
+        List<MealDto> mealsCollection  = getAllMeals();
+        Set<String> mealsResponse = new HashSet<>();
+
+        while (mealsResponse.size() < number){
+            mealsResponse.add(mealsCollection.get((int)(Math.random() * mealsCollection.size())).getMealName());
+        }
+
+        return new ArrayList<>(mealsResponse);
     }
 }

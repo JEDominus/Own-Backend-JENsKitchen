@@ -17,4 +17,6 @@ public interface MealService {
     MealDto updateMeal(MealDto request, String id);
 
     void deleteMeal(String id);
+
+    List<String> mealsSelector(int number);
 }
