@@ -4,15 +4,16 @@ import lombok.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class BadRequestException extends RuntimeException{
-
-    public BadRequestException(String message){
+    private List<BadRequestError> errors;
+    public BadRequestException(String message, List<BadRequestError> errors){
         super(message);
+        this.errors = errors;
     }
-
 }

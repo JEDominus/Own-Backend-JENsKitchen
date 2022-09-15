@@ -1,4 +1,4 @@
-package com.jens.kitchen.model.dtos;
+package com.jens.kitchen.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +13,6 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecipeDto {
-    private List<StepDto> steps;
+public class BadRequestErrors {
+    List<BadRequestError> errors;
 }

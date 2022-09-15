@@ -1,5 +1,7 @@
 package com.jens.kitchen.service.implementation;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jens.kitchen.domain.NewMealRequest;
 import com.jens.kitchen.domain.NewMealResponse;
 import com.jens.kitchen.exceptions.NotFoundException;
@@ -23,13 +25,13 @@ public class MealServiceImplementation implements MealService {
 
     @Override
     public NewMealResponse createMeal(NewMealRequest request) {
-        //validator.validate(request);
+        System.out.println(request.getRecipeSteps());
+        validator.validateRequest(request);
 
         MealDto meal = MealDto.builder().
                 mealName(request.getMealName()).
-                mealType(request.getMealType()).
                 ingredients(request.getIngredients()).
-                recipe(request.getRecipe()).
+                recipeSteps(request.getRecipeSteps()).
                 build();
 
         MealDto savedMeal = repository.save(meal);
@@ -56,16 +58,15 @@ public class MealServiceImplementation implements MealService {
 
     @Override
     public MealDto updateMeal(MealDto request, String id){
-        validator.validate(request);
+        validator.validateRequest(request);
 
         Optional<MealDto> mealFound = repository.findById(id);
 
         if(mealFound.isPresent()){
             MealDto updatedMeal = mealFound.get();
             updatedMeal.setMealName(request.getMealName()).
-                    setMealType(request.getMealType()).
                     setIngredients(request.getIngredients()).
-                    setRecipe(request.getRecipe());
+                    setRecipeSteps(request.getRecipeSteps());
 
             repository.save(updatedMeal);
             return updatedMeal;
