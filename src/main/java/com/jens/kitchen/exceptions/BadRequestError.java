@@ -1,4 +1,4 @@
-package com.jens.kitchen.model.dtos;
+package com.jens.kitchen.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class StepDto {
-    private int number;
+public class BadRequestError {
+    private String field;
     private String description;
 }

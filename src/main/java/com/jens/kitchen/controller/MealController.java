@@ -46,4 +46,10 @@ public class MealController {
     public void deleteMeal(@PathVariable String id){
         service.deleteMeal(id);
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/list/{number}")
+    public List<String> getListOfWeekMeals(@PathVariable int number){
+        return service.mealsSelector(number);
+    }
 }

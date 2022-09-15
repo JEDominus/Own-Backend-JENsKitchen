@@ -1,6 +1,5 @@
 package com.jens.kitchen.model.dtos;
 
-import com.jens.kitchen.model.enums.TypesEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +20,6 @@ public class MealDto {
     @Id
     private String id;
     private String mealName;
-    private TypesEnum mealType;
-    private List<IngredientDto> ingredients;
-    private RecipeDto recipe;
+    private List<String> ingredients;
+    private List<String> recipeSteps;
 }
