@@ -1,7 +1,7 @@
 package com.jens.kitchen.controller;
 
-import com.jens.kitchen.domain.NewMealRequest;
-import com.jens.kitchen.domain.NewMealResponse;
+import com.jens.kitchen.domain.MealRequest;
+import com.jens.kitchen.domain.MealResponse;
 import com.jens.kitchen.model.dtos.MealDto;
 import com.jens.kitchen.service.MealService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class MealController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/create", consumes = "application/json", produces = "application/json")
-    public NewMealResponse createNewMeal(@RequestBody NewMealRequest request){
+    public MealResponse createNewMeal(@RequestBody MealRequest request){
         return service.createMeal(request);
     }
 
@@ -37,7 +37,7 @@ public class MealController {
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/{id}", consumes = "application/json", produces = "application/json")
-    public MealDto updateMeal(@RequestBody MealDto request, @PathVariable String id){
+    public MealDto updateMeal(@RequestBody MealRequest request, @PathVariable String id){
         return service.updateMeal(request, id);
     }
 

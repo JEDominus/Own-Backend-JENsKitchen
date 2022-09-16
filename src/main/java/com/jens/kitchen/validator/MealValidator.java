@@ -1,9 +1,9 @@
 package com.jens.kitchen.validator;
 
-import com.jens.kitchen.domain.NewMealRequest;
+import com.jens.kitchen.domain.MealRequest;
 import com.jens.kitchen.exceptions.ApiError;
 import com.jens.kitchen.exceptions.BadRequestException;
-import com.jens.kitchen.model.dtos.MealDto;
+import com.jens.kitchen.model.enums.Mealtime;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,28 +17,28 @@ public class MealValidator {
     private static final String BLANK_FIELD = "Field %s is blank.";
     private static final String NULL_FIELD = "Field %s doesn't exist and is required.";
     private static final String BLANK_FIELD_COLLECTION = "Field %s in collection %s is blank.";
-    private static final String MEAL_NAME = "'Meal Name'";
+    private static final String MEAL_TIME = "'Time'";
+    private static final String MEAL_NAME = "'Name'";
     private static final String INGREDIENT = "'Ingredient'";
     private static final String INGREDIENTS = "'Ingredients'";
     private static final String RECIPE_STEPS = "'Recipe Steps'";
     private static final String DESCRIPTION_STEPS = "'Step Description'";
 
-    public void validateRequest(NewMealRequest request){
+    public void validateRequest(MealRequest request){
         List<ApiError> errors = new ArrayList<>();
 
-        validateMealName(request.getMealName(), errors);
+        validateMealtime(request.getTime(), errors);
+        validateMealName(request.getName(), errors);
         validateIngredients(request.getIngredients(), errors);
         //validateRecipeSteps(request.getRecipeSteps(), errors);
 
         validateErrors(errors);
     }
 
-    public void validateRequest(MealDto request){
-        List<ApiError> errors = new ArrayList<>();
-
-        validateMealName(request.getMealName(), errors);
-        validateIngredients(request.getIngredients(), errors);
-        //validateRecipeSteps(request.getRecipeSteps(), errors);
+    private void validateMealtime(Mealtime mealtime, List<ApiError> errors){
+        if (isNull(mealtime)) {
+            addError(MEAL_TIME, String.format(NULL_FIELD, MEAL_TIME), errors);
+        }
     }
 
     private void validateMealName(String mealName, List<ApiError> errors){

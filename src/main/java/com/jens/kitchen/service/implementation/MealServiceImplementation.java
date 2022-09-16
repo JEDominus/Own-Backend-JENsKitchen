@@ -1,7 +1,7 @@
 package com.jens.kitchen.service.implementation;
 
-import com.jens.kitchen.domain.NewMealRequest;
-import com.jens.kitchen.domain.NewMealResponse;
+import com.jens.kitchen.domain.MealRequest;
+import com.jens.kitchen.domain.MealResponse;
 import com.jens.kitchen.exceptions.ApiError;
 import com.jens.kitchen.exceptions.NotFoundException;
 import com.jens.kitchen.model.dtos.MealDto;
@@ -23,18 +23,19 @@ public class MealServiceImplementation implements MealService {
     private MealRepository repository;
 
     @Override
-    public NewMealResponse createMeal(NewMealRequest request) {
+    public MealResponse createMeal(MealRequest request) {
         validator.validateRequest(request);
 
         MealDto meal = MealDto.builder().
-                mealName(request.getMealName()).
+                time(request.getTime()).
+                name(request.getName()).
                 ingredients(request.getIngredients()).
                 //recipeSteps(request.getRecipeSteps()).
                 build();
 
         MealDto savedMeal = repository.save(meal);
 
-        return new NewMealResponse(savedMeal.getId());
+        return new MealResponse(savedMeal.getId());
     }
 
     @Override
@@ -55,14 +56,16 @@ public class MealServiceImplementation implements MealService {
     }
 
     @Override
-    public MealDto updateMeal(MealDto request, String id){
+    public MealDto updateMeal(MealRequest request, String id){
         validator.validateRequest(request);
 
         Optional<MealDto> mealFound = repository.findById(id);
 
         if(mealFound.isPresent()){
             MealDto updatedMeal = mealFound.get();
-            updatedMeal.setMealName(request.getMealName()).
+            updatedMeal.setId(id).
+                    setTime(request.getTime()).
+                    setName(request.getName()).
                     setIngredients(request.getIngredients());
                     //setRecipeSteps(request.getRecipeSteps());
 
@@ -92,7 +95,7 @@ public class MealServiceImplementation implements MealService {
         Set<String> mealsResponse = new HashSet<>();
 
         while (mealsResponse.size() < number){
-            mealsResponse.add(mealsCollection.get((int)(Math.random() * mealsCollection.size())).getMealName());
+            mealsResponse.add(mealsCollection.get((int)(Math.random() * mealsCollection.size())).getName());
         }
 
         return new ArrayList<>(mealsResponse);
