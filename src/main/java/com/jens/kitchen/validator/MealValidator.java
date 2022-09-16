@@ -15,7 +15,6 @@ import static java.util.Objects.isNull;
 public class MealValidator {
     private static final String EMPTY_FIELD = "Field %s is empty.";
     private static final String BLANK_FIELD = "Field %s is blank.";
-    private static final String WRONG_ENUM = "'%s' is not in the collection. please select between '%s', '%s' and '%s'.";
     private static final String NULL_FIELD = "Field %s doesn't exist and is required.";
     private static final String BLANK_FIELD_COLLECTION = "Field %s in collection %s is blank.";
     private static final String MEAL_TIME = "'Time'";
