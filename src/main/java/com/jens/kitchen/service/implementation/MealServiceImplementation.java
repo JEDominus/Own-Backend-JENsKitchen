@@ -24,13 +24,12 @@ public class MealServiceImplementation implements MealService {
 
     @Override
     public NewMealResponse createMeal(NewMealRequest request) {
-        System.out.println(request.getRecipeSteps());
         validator.validateRequest(request);
 
         MealDto meal = MealDto.builder().
                 mealName(request.getMealName()).
                 ingredients(request.getIngredients()).
-                recipeSteps(request.getRecipeSteps()).
+                //recipeSteps(request.getRecipeSteps()).
                 build();
 
         MealDto savedMeal = repository.save(meal);
@@ -64,8 +63,8 @@ public class MealServiceImplementation implements MealService {
         if(mealFound.isPresent()){
             MealDto updatedMeal = mealFound.get();
             updatedMeal.setMealName(request.getMealName()).
-                    setIngredients(request.getIngredients()).
-                    setRecipeSteps(request.getRecipeSteps());
+                    setIngredients(request.getIngredients());
+                    //setRecipeSteps(request.getRecipeSteps());
 
             repository.save(updatedMeal);
             return updatedMeal;

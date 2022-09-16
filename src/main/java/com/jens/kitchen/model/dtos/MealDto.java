@@ -21,5 +21,5 @@ public class MealDto {
     private String id;
     private String mealName;
     private List<String> ingredients;
-    private List<String> recipeSteps;
+    //private List<String> recipeSteps;
 }

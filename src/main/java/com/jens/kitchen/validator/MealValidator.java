@@ -28,7 +28,7 @@ public class MealValidator {
 
         validateMealName(request.getMealName(), errors);
         validateIngredients(request.getIngredients(), errors);
-        validateRecipeSteps(request.getRecipeSteps(), errors);
+        //validateRecipeSteps(request.getRecipeSteps(), errors);
 
         validateErrors(errors);
     }
@@ -38,7 +38,7 @@ public class MealValidator {
 
         validateMealName(request.getMealName(), errors);
         validateIngredients(request.getIngredients(), errors);
-        validateRecipeSteps(request.getRecipeSteps(), errors);
+        //validateRecipeSteps(request.getRecipeSteps(), errors);
     }
 
     private void validateMealName(String mealName, List<ApiError> errors){

@@ -2,13 +2,11 @@ package com.jens.kitchen.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Getter
 @Accessors(chain = true)
 @AllArgsConstructor
-@NoArgsConstructor
 public enum IngredientsEnum {
     //(IMPROVE) Carnes
     MOLIDA_DE_RES,

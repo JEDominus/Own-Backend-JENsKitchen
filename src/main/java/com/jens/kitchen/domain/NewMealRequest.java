@@ -13,5 +13,5 @@ import java.util.List;
 public class NewMealRequest {
     private String mealName;
     private List<String> ingredients;
-    private List<String> recipeSteps;
+    //private List<String> recipeSteps;
 }
