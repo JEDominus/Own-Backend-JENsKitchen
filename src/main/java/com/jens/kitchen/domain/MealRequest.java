@@ -1,5 +1,6 @@
 package com.jens.kitchen.domain;
 
+import com.jens.kitchen.model.enums.Mealtime;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -11,7 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewMealRequest {
-    private String mealName;
+    private Mealtime time;
+    private String name;
     private List<String> ingredients;
     //private List<String> recipeSteps;
 }
