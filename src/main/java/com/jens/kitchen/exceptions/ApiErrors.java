@@ -13,6 +13,6 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class BadRequestErrors {
-    List<BadRequestError> errors;
+public class ApiErrors {
+    List<ApiError> errors;
 }

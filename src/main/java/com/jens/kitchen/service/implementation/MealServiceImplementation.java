@@ -1,9 +1,8 @@
 package com.jens.kitchen.service.implementation;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jens.kitchen.domain.NewMealRequest;
 import com.jens.kitchen.domain.NewMealResponse;
+import com.jens.kitchen.exceptions.ApiError;
 import com.jens.kitchen.exceptions.NotFoundException;
 import com.jens.kitchen.model.dtos.MealDto;
 import com.jens.kitchen.repository.MealRepository;
@@ -49,10 +48,10 @@ public class MealServiceImplementation implements MealService {
         Optional<MealDto> mealFound = repository.findById(id);
 
         if(mealFound.isPresent()){
-            MealDto meal = mealFound.get();
-            return meal;
+            return mealFound.get();
         }else{
-            throw new NotFoundException(String.format("Meal not found with id: ", id));
+            ApiError error = ApiError.builder().field("Meal").description(String.format("Meal with id '%s' not found.", id)).build();
+            throw new NotFoundException("", error);
         }
     }
 
@@ -71,7 +70,8 @@ public class MealServiceImplementation implements MealService {
             repository.save(updatedMeal);
             return updatedMeal;
         }else{
-            throw new NotFoundException(String.format("Meal not found with id: ", id));
+            ApiError error = ApiError.builder().field("Meal").description(String.format("Meal with id '%s' not found.", id)).build();
+            throw new NotFoundException("", error);
         }
     }
 
@@ -82,7 +82,8 @@ public class MealServiceImplementation implements MealService {
         if(mealFound.isPresent()){
             repository.deleteById(id);
         }else{
-            throw new NotFoundException(String.format("Meal not found with id: ", id));
+            ApiError error = ApiError.builder().field("Meal").description(String.format("Meal with id '%s' not found.", id)).build();
+            throw new NotFoundException("", error);
         }
     }
 
