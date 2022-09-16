@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class BadRequestError {
+public class ApiError {
     private String field;
     private String description;
 }

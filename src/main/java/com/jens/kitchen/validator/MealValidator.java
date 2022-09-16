@@ -1,10 +1,9 @@
 package com.jens.kitchen.validator;
 
 import com.jens.kitchen.domain.NewMealRequest;
-import com.jens.kitchen.exceptions.BadRequestError;
+import com.jens.kitchen.exceptions.ApiError;
 import com.jens.kitchen.exceptions.BadRequestException;
 import com.jens.kitchen.model.dtos.MealDto;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class MealValidator {
     private static final String DESCRIPTION_STEPS = "'Step Description'";
 
     public void validateRequest(NewMealRequest request){
-        List<BadRequestError> errors = new ArrayList<>();
+        List<ApiError> errors = new ArrayList<>();
 
         validateMealName(request.getMealName(), errors);
         validateIngredients(request.getIngredients(), errors);
@@ -35,14 +34,14 @@ public class MealValidator {
     }
 
     public void validateRequest(MealDto request){
-        List<BadRequestError> errors = new ArrayList<>();
+        List<ApiError> errors = new ArrayList<>();
 
         validateMealName(request.getMealName(), errors);
         validateIngredients(request.getIngredients(), errors);
         validateRecipeSteps(request.getRecipeSteps(), errors);
     }
 
-    private void validateMealName(String mealName, List<BadRequestError> errors){
+    private void validateMealName(String mealName, List<ApiError> errors){
         if (isNull(mealName)) {
             addError(MEAL_NAME, String.format(NULL_FIELD, MEAL_NAME), errors);
         } else if (mealName.isBlank()) {
@@ -52,7 +51,7 @@ public class MealValidator {
         }
     }
 
-    private void validateIngredients(List<String> ingredients, List<BadRequestError> errors){
+    private void validateIngredients(List<String> ingredients, List<ApiError> errors){
         if (isNull(ingredients)) {
             addError(INGREDIENTS, String.format(NULL_FIELD, INGREDIENTS), errors);
         } else if (ingredients.isEmpty()){
@@ -66,7 +65,7 @@ public class MealValidator {
         }
     }
 
-    private void validateRecipeSteps(List<String> recipeSteps, List<BadRequestError> errors){
+    private void validateRecipeSteps(List<String> recipeSteps, List<ApiError> errors){
         if (isNull(recipeSteps)) {
             addError(RECIPE_STEPS, String.format(NULL_FIELD, RECIPE_STEPS), errors);
         } else if (recipeSteps.isEmpty()){
@@ -80,8 +79,8 @@ public class MealValidator {
         }
     }
 
-    private void addError(String field, String description, List<BadRequestError> errors){
-        BadRequestError newError = BadRequestError.builder().
+    private void addError(String field, String description, List<ApiError> errors){
+        ApiError newError = ApiError.builder().
                 field(field).
                 description(description).
                 build();
@@ -89,7 +88,7 @@ public class MealValidator {
         errors.add(newError);
     }
 
-    private void validateErrors(List<BadRequestError> errors){
+    private void validateErrors(List<ApiError> errors){
         if(errors.size() > 0){
             throw new BadRequestException("", errors);
         }

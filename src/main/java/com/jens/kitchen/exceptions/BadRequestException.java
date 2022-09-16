@@ -1,8 +1,6 @@
 package com.jens.kitchen.exceptions;
 
 import lombok.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
@@ -11,8 +9,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class BadRequestException extends RuntimeException{
-    private List<BadRequestError> errors;
-    public BadRequestException(String message, List<BadRequestError> errors){
+    private List<ApiError> errors;
+    public BadRequestException(String message, List<ApiError> errors){
         super(message);
         this.errors = errors;
     }
