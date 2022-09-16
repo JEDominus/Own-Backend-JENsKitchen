@@ -11,7 +11,7 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewMealRequest {
+public class MealRequest {
     private Mealtime time;
     private String name;
     private List<String> ingredients;

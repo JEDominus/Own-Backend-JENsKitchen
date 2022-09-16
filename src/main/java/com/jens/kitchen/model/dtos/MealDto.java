@@ -1,5 +1,6 @@
 package com.jens.kitchen.model.dtos;
 
+import com.jens.kitchen.model.enums.Mealtime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,8 @@ import java.util.List;
 public class MealDto {
     @Id
     private String id;
-    private String mealName;
+    private Mealtime time;
+    private String name;
     private List<String> ingredients;
     //private List<String> recipeSteps;
 }

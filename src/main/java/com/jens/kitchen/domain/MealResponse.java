@@ -8,6 +8,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewMealResponse {
+public class MealResponse {
     private String id;
 }
