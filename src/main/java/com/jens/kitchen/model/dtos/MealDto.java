@@ -15,7 +15,7 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "mealDto")
+@Document(collection = "Meals")
 public class MealDto {
     @Id
     private String id;
