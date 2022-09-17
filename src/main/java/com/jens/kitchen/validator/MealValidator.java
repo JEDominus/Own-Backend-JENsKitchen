@@ -30,7 +30,7 @@ public class MealValidator {
         validateMealtime(request.getTime(), errors);
         validateMealName(request.getName(), errors);
         validateIngredients(request.getIngredients(), errors);
-        //validateRecipeSteps(request.getRecipeSteps(), errors);
+        validateRecipeSteps(request.getRecipeSteps(), errors);
 
         validateErrors(errors);
     }
@@ -66,14 +66,14 @@ public class MealValidator {
     }
 
     private void validateRecipeSteps(List<String> recipeSteps, List<ApiError> errors){
-        if (isNull(recipeSteps)) {
-            addError(RECIPE_STEPS, String.format(NULL_FIELD, RECIPE_STEPS), errors);
-        } else if (recipeSteps.isEmpty()){
-            addError(RECIPE_STEPS, String.format(EMPTY_FIELD, RECIPE_STEPS), errors);
-        }else{
-            for(String recipeStep : recipeSteps){
-                if(recipeStep.isBlank()){
-                    addError(DESCRIPTION_STEPS, String.format(BLANK_FIELD_COLLECTION, DESCRIPTION_STEPS, RECIPE_STEPS), errors);
+        if (!isNull(recipeSteps)) {
+            if (recipeSteps.isEmpty()){
+                addError(RECIPE_STEPS, String.format(EMPTY_FIELD, RECIPE_STEPS), errors);
+            }else{
+                for(String recipeStep : recipeSteps){
+                    if(recipeStep.isBlank()){
+                        addError(DESCRIPTION_STEPS, String.format(BLANK_FIELD_COLLECTION, DESCRIPTION_STEPS, RECIPE_STEPS), errors);
+                    }
                 }
             }
         }

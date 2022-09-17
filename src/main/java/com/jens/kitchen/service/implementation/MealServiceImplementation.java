@@ -31,7 +31,7 @@ public class MealServiceImplementation implements MealService {
                 time(request.getTime()).
                 name(request.getName()).
                 ingredients(request.getIngredients()).
-                //recipeSteps(request.getRecipeSteps()).
+                recipeSteps(request.getRecipeSteps()).
                 build();
 
         MealDto savedMeal = repository.save(meal);
@@ -72,8 +72,8 @@ public class MealServiceImplementation implements MealService {
             updatedMeal.setId(id).
                     setTime(request.getTime()).
                     setName(request.getName()).
-                    setIngredients(request.getIngredients());
-                    //setRecipeSteps(request.getRecipeSteps());
+                    setIngredients(request.getIngredients()).
+                    setRecipeSteps(request.getRecipeSteps());
 
             repository.save(updatedMeal);
             return updatedMeal;

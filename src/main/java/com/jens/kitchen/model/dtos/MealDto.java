@@ -1,5 +1,7 @@
 package com.jens.kitchen.model.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.jens.kitchen.model.enums.Mealtime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,11 +19,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "Meals")
+@JsonInclude(Include.NON_NULL)
 public class MealDto {
     @Id
     private String id;
     private Mealtime time;
     private String name;
     private List<String> ingredients;
-    //private List<String> recipeSteps;
+    private List<String> recipeSteps;
 }
