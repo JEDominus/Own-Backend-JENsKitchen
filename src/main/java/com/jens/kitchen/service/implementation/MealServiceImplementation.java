@@ -5,6 +5,7 @@ import com.jens.kitchen.domain.MealResponse;
 import com.jens.kitchen.exceptions.ApiError;
 import com.jens.kitchen.exceptions.NotFoundException;
 import com.jens.kitchen.model.dtos.MealDto;
+import com.jens.kitchen.model.enums.Mealtime;
 import com.jens.kitchen.repository.MealRepository;
 import com.jens.kitchen.service.MealService;
 import com.jens.kitchen.validator.MealValidator;
@@ -41,6 +42,11 @@ public class MealServiceImplementation implements MealService {
     @Override
     public List<MealDto> getAllMeals(){
         return repository.findAll();
+    }
+
+    @Override
+    public List<MealDto> getAllMealsByTime(String time) {
+        return repository.findByTime(time);
     }
 
     @Override
@@ -90,8 +96,8 @@ public class MealServiceImplementation implements MealService {
     }
 
     @Override
-    public List<String> mealsSelector(int number) {
-        List<MealDto> mealsCollection  = getAllMeals();
+    public List<String> getWeeklyMeals(String time, int number) {
+        List<MealDto> mealsCollection  = getAllMealsByTime(time);
         Set<String> mealsResponse = new HashSet<>();
 
         while (mealsResponse.size() < number){

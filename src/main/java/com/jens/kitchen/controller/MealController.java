@@ -30,6 +30,12 @@ public class MealController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/filter/{time}")
+    public List<MealDto> getAllMealsByTime(@PathVariable String time){
+        return service.getAllMealsByTime(time);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{id}")
     public MealDto getMealById(@PathVariable String id){
         return service.getMealById(id);
@@ -48,8 +54,8 @@ public class MealController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/list/{number}")
-    public List<String> getListOfWeekMeals(@PathVariable int number){
-        return service.mealsSelector(number);
+    @GetMapping("/weekly/{time}/{number}")
+    public List<String> getWeeklyMeals(@PathVariable String time, @PathVariable int number){
+        return service.getWeeklyMeals(time, number);
     }
 }

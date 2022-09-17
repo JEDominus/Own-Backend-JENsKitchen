@@ -12,11 +12,13 @@ public interface MealService {
 
     List<MealDto> getAllMeals();
 
+    List<MealDto> getAllMealsByTime(String time);
+
     MealDto getMealById(String id);
 
     MealDto updateMeal(MealRequest request, String id);
 
     void deleteMeal(String id);
 
-    List<String> mealsSelector(int number);
+    List<String> getWeeklyMeals(String time, int number);
 }
