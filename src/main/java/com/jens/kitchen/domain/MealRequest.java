@@ -15,5 +15,5 @@ public class MealRequest {
     private Mealtime time;
     private String name;
     private List<String> ingredients;
-    //private List<String> recipeSteps;
+    private List<String> recipeSteps;
 }
